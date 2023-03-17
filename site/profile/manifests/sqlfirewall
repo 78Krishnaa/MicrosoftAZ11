@@ -1,0 +1,32 @@
+class profile::sqlasfirewall(
+        
+){   
+  windows_firewall::exception { 'Allow SQL Program (SQL Analysis Services)':
+
+  ensure                                  => present,
+  direction                               => 'in',
+  action                                  => 'allow',
+  enabled                                 => true,
+  protocol                                => 'any',
+  allow_edge_traversal                    => 'false,
+  local_port                              => 'any',
+  remote_port                             => 'any',
+  program                                 => 'C:\ProgramFiles\Microsoft SQL Server\MSAS14.DB01\OLAP\bin\msmdsrv.exe',
+  display_name                            => 'Allow SQL Program (SQL Analysis Services)',
+  description                             => 'Allow SQL Program(SQL Analysis Services)',
+  }
+
+windows_firewall::exception { 'Allow SQL TCP Port 2382(SQL Analysis Services)':
+
+  ensure                                  => present,
+  direction                               => 'in',
+  action                                  => 'allow',
+  enabled                                 => true,
+  protocol                                => 'TCP',
+  allow_edge_traversal                    => false,
+  local_port                              => '2382',
+  remote_port                             => 'any',
+  display_name                            => 'Allow SQL TCP Port 2382(SQL Analysis Services)',
+  description                             => 'Allow SQL TCP Port 2382(SQL Analysis Services)',
+  }
+ }
